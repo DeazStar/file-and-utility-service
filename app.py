@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
@@ -92,8 +93,10 @@ def get_image_file(filename):
 def handle_error(error):
     print(f"❌ Error: {error}")
     return jsonify({'error': str(error)}), 500
-
+5000
 
 if __name__ == '__main__':
+    load_dotenv()
+    APP_PORT = int(os.getenv('APP_PORT', 8000))
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=APP_PORT, debug=False)

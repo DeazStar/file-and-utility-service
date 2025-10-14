@@ -1,0 +1,18 @@
+services:
+  file-and-utility-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    # for now use development server till we can figure out 
+    # a way to make it work with gunicorn
+    # command: gunicorn -w 16 --bind 0.0.0.0:${APP_PORT} run:app
+    command: flask run --host=0.0.0.0 --port=${APP_PORT}
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - APP_PORT=${APP_PORT}
