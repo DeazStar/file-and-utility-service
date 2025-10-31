@@ -4,8 +4,12 @@ import os
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+# allow all origin
+CORS(app)
 
 # Uploaded images folder path
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'image')
